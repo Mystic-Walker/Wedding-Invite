@@ -3,27 +3,17 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   /* Background image pattern */
-  background-image: url("/website\ background_2.png"); /* replace with your actual file */
+  background-image: url("/Website/website\ background_2.png"); /* replace with your actual file */
   background-repeat: repeat; /* tile the image in both directions */
   background-size: auto;     /* use the image’s natural size */
-  background-size: 400px 400px;
+  background-size: 200px 200px;
 
   background-attachment: fixed; /* keeps pattern fixed while scrolling */
 }
 
-
 /* Main container */
 .container {
-  max-width: 1000px;
-  margin: 0 auto; /* Center the container */
-  text-align: center;
-  background: #efe2e9; /* Inside container background */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* Main container */
-.container {
-  max-width: 1000px;
+  max-width: 700px;
   margin: 0 auto; /* Center the container */
   text-align: center;
   background: #efe2e9; /* Inside background (light, wedding-theme look) */
