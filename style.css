@@ -1,3 +1,40 @@
+/* Loader full-screen */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fffaf7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Spinner animation */
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #ff758c;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hide loader after loading */
+body.loaded #loader {
+  display: none;
+}
+
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -25,26 +62,6 @@ header video {
   object-fit: cover;
   display: block;
 }
-
-/* Style for unmute button */
-#unmuteBtn {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 30px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-#unmuteBtn:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
 
 /* Main container */
 .container {
@@ -82,6 +99,32 @@ header img {
   object-fit: cover;
   display: block;
   margin: 0 auto;
+}
+/* Ensure header is positioned for relative child elements */
+header {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Position music button below the video, right aligned */
+.music-btn {
+  position: absolute;
+  bottom: -10px;       /* places it just below the video */
+  right: -10px;         /* right side of header */
+  background: transparent;
+  border: none;
+  border-radius: 70%;
+  padding: 12px 16px;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  /* box-shadow: 0 4px 8px rgba(0,0,0,0.3); */
+  transition: background 0.3s;
+}
+
+.music-btn:hover {
+  background: transparent;
 }
 
 header h1, 
