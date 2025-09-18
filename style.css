@@ -84,12 +84,46 @@ header video {
   display: block;
 }
 
-
 /* Header styling */
 header {
   text-align: center;
   position: relative;
   overflow: hidden;
+}
+
+/* Navbar styling */
+.navbar {
+  background: #c4659e; /* Burgundy tone */
+  /* background-color: transparent; */
+  padding: 5px 0;
+  position: sticky;
+  top: 0; /* stays at top while scrolling */
+  z-index: 1000;
+}
+
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.navbar li {
+  margin: 0 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-family: 'Agbalumo', sans-serif; /* or your chosen heading font */
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #ffd1e8; /* soft pink highlight on hover */
 }
 
 header img {
@@ -140,6 +174,37 @@ header p {
 header h1 {
   top: 30%;
   font-size: 3rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Agbaluma', sans-serif;
+  font-size: 2rem;   /* Adjust size (e.g., 40px = 2.5rem) */
+  color: #4e0d15;      /* Burgundy color example */
+  text-align: center;  /* Optional: Center headings */
+  /* -webkit-text-stroke: 0.0001px #efe2e9; Outline with background color to "thin" */
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Agbalumo', sans-serif;
+  font-size: 2rem;   /* Adjust size (e.g., 40px = 2.5rem) */
+  font-weight: lighter;
+  color: #4e0d15;      /* Burgundy color example */
+  text-align: center;  /* Optional: Center headings */
+  margin: -20px;              /* removes all default space */
+  padding: -10px;             /* in case there's any padding */
+}
+
+
+p {
+  font-family: 'Tangerine', cursive;
+  font-size: 1.8rem;   /* adjust size to make it readable */
+  line-height: 1.6;    /* spacing for elegance */
+  color: #333;         /* you can change to match your theme */
+}
+p {
+  font-family: 'Handlee', cursive;
+  font-size: 1.2rem;   /* adjust as needed */
+  line-height: 1.6;
+  color: #444;         /* you can change this to match your theme */
 }
 
 header p {
