@@ -40,7 +40,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   /* Background image pattern */
-  background-image: url("/Website/website\ background_2.png"); /* replace with your actual file */
+  background-image: url("Background.png"); /* replace with your actual file */
   background-repeat: repeat; /* tile the image in both directions */
   background-size: auto;     /* use the image’s natural size */
   background-size: 200px 200px; 
@@ -57,22 +57,20 @@ header video {
 }
 .banner-video {
   width: 100%;
-  height: auto;
-  max-height: 80vh;
+  max-height: 80vh; /* keeps video under screen height */
   object-fit: cover;
-  display: block;
 }
 
 /* Main container */
 .container {
-  max-width: 700px;
+  max-width: 1000px;
   margin: 0 auto; /* Center the container */
   text-align: center;
   background: #efe2e9; /* Inside background (light, wedding-theme look) */
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 .banner-container {
-  width: 1000px;           /* match your design width */
+  width: 1200px;           /* match your design width */
   max-width: 100%;         /* still allow it to shrink on smaller screens */
   margin: 0 auto;          /* center the banner horizontally */
   overflow: hidden;        /* prevents overflow scrollbars */
@@ -85,45 +83,12 @@ header video {
 }
 
 /* Header styling */
+
 header {
-  text-align: center;
   position: relative;
+  width: 100%;
   overflow: hidden;
-}
-
-/* Navbar styling */
-.navbar {
-  background: #c4659e; /* Burgundy tone */
-  /* background-color: transparent; */
-  padding: 5px 0;
-  position: sticky;
-  top: 0; /* stays at top while scrolling */
-  z-index: 1000;
-}
-
-.navbar ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.navbar li {
-  margin: 0 20px;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: white;
-  font-family: 'Agbalumo', sans-serif; /* or your chosen heading font */
-  font-size: 1rem;
-  transition: color 0.3s ease;
-}
-
-.navbar a:hover {
-  color: #ffd1e8; /* soft pink highlight on hover */
+  text-align: center;
 }
 
 header img {
@@ -141,39 +106,146 @@ header {
   width: 100%;
 }
 
-/* Position music button below the video, right aligned */
-.music-btn {
-  position: absolute;
-  bottom: -10px;       /* places it just below the video */
-  right: -10px;         /* right side of header */
-  background: transparent;
-  border: none;
-  border-radius: 70%;
-  padding: 12px 16px;
-  font-size: 1.5rem;
-  color: white;
-  cursor: pointer;
-  /* box-shadow: 0 4px 8px rgba(0,0,0,0.3); */
-  transition: background 0.3s;
-}
-
-.music-btn:hover {
-  background: transparent;
-}
-
 header h1, 
 header p {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   color: white;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
-  margin: 0;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+  opacity: 0;
+  animation: fadeIn 2s forwards;
 }
 
 header h1 {
   top: 30%;
   font-size: 3rem;
+  animation-delay: 0.5s;
+}
+
+header p {
+  top: 45%;
+  font-size: 1.3rem;
+  animation-delay: 1.5s;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Adjust font sizes on smaller screens */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+    top: 25%;
+  }
+  header p {
+    font-size: 1rem;
+    top: 35%;
+  }
+
+  .music-btn {
+    bottom: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Navbar base */
+.navbar {
+  background: #da6bae;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  text-align: center;
+}
+
+/* Hide menu initially on small screens */
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: none; /* hidden by default */
+  flex-direction: column;
+  background: #da6bae;
+}
+
+.navbar li {
+  margin: 10px 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-family: 'Agbalumo', sans-serif;
+  font-size: 1rem;
+  padding: 8px 15px;
+  display: block;
+  transition: background 0.3s ease;
+}
+
+.navbar a:hover {
+  background: #8e285f;
+  border-radius: 5px;
+}
+
+/* Hamburger icon */
+.menu-toggle {
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  display: block;
+}
+
+/* Desktop view (show menu inline, hide hamburger) */
+@media (min-width: 768px) {
+  .menu-toggle {
+    display: none;
+  }
+  .navbar ul {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: center;
+    background: none;
+  }
+  .navbar li {
+    margin: 0 10px;
+  }
+}
+
+/* Position music button below the video, right aligned */
+.music-btn {
+  position: absolute;
+  bottom: -10px;       /* places it just below the video */
+  right: -10px;         /* right side of header */
+  /* background: transparent; */
+  background: rgba(255,255,255,0.2);
+  border: none;
+  border-radius: 50%;
+  padding: 12px 16px;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.music-btn:hover {
+  transform: scale(1.2);
+  background: rgba(255,255,255,0.4);
+}
+
+/* Pulse animation when music is paused */
+.music-btn.paused {
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -205,11 +277,6 @@ p {
   font-size: 1.2rem;   /* adjust as needed */
   line-height: 1.6;
   color: #444;         /* you can change this to match your theme */
-}
-
-header p {
-  top: 50%;
-  font-size: 1.3rem;
 }
 
 .venue {
@@ -246,4 +313,199 @@ header p {
 
 .map-link:hover {
   background: linear-gradient(135deg, #ff758c, #ff7eb3);
+}
+
+/* Section styling */
+.places {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.memories-carousel {
+  max-width: 700px; /* smaller width for personal photos */
+  margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-slide p {
+    font-size: 1rem;
+  }
+
+  .carousel-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1.5rem;
+  }
+}
+
+.carousel-track-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-item {
+  min-width: 100%; /* Each slide takes full container */
+  box-sizing: border-box;
+}
+
+.carousel-item img {
+  width: 100%;
+  display: block;
+}
+
+.carousel-item {
+  text-align: center;
+  padding: 10px;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.carousel-item img:hover {
+  transform: scale(1.05); /* Zoom effect on hover */
+}
+
+.caption {
+  margin-top: 8px;
+  font-size: 1rem;
+  font-family: 'Tangerine', cursive; /* or another elegant font */
+  color: #444;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* Carousel Container */
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 20px auto;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+/* Each slide */
+.carousel-slide {
+  min-width: 100%; /* Full width for each slide */
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Images inside slides */
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.carousel-slide img:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.carousel-slide p {
+  font-family: 'Tangerine', cursive;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #444;
+}
+
+/* Navigation Buttons */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;  /* makes button round */
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.3s ease;
+}
+
+.carousel-btn.prev {
+  left: 15px;
+}
+
+.carousel-btn.next {
+  right: 15px;
+}
+
+.carousel-btn:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+/* Contact-container */
+.contact-container {
+  background: #fdf0f6;         /* soft pastel background */
+  padding: 40px 20px;
+  margin-top: 40px;
+  border-top: 3px solid #ff7eb3; /* subtle divider */
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+.contact-container h2 {
+  font-family: 'Agbalumo', cursive; /* elegant heading font */
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: #a83279;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.contact-container p {
+  font-family: 'Tangerine', cursive;
+  font-size: 1.5rem;
+  margin: 12px 0;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* Links as soft buttons */
+.contact-container a {
+  display: inline-block;
+  margin: 8px 10px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #e68bb0, #eed0d5);
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.contact-container a:hover {
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  transform: translateY(-3px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-container h2 {
+    font-size: 1.7rem;
+  }
+  .contact-container p {
+    font-size: 1.2rem;
+  }
+  .contact-container a {
+    padding: 10px 18px;
+    font-size: 1rem;
+  }
 }

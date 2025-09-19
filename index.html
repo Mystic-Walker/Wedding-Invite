@@ -7,8 +7,7 @@
   <title>
     Akshaya & Anand - Wedding Invitation
   </title>
-  <link rel="icon" type="image/png" href="A&A_magenta.png">
-<!-- <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet"> -->
+<link rel="icon" type="image/png" href="A&A_icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Agbalumo&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
@@ -23,13 +22,13 @@
 
 <body>
   <div class="container">
-<header>
+  <header>
   <video autoplay muted playsinline id="bannerVideo" class="banner-video">
-    <source src="A (1620 x 720 px).mp4" type="video/mp4">
+    <source src="A&A_lighter.mp4" type="video/mp4">
   </video>
   <!-- Music Toggle Button inside header -->
   <button id="music-toggle" class="music-btn">🔊</button>
-</header>
+  </header>
 
   <audio id="bg-music" loop>
     <source src="soft-piano-72454.mp3" type="audio/mp3">
@@ -37,19 +36,20 @@
   </audio>
 
   <nav class="navbar">
-  <ul>
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+    <ul id="menu">
     <li><a href="#our-story">Our Story</a></li>
     <li><a href="#Family">Family</a></li>
     <li><a href="#memories">Memories</a></li>
-    <li><a href="#places">Places to Visit</a></li>
-    <li><a href="#feedback">Feedback</a></li>
-    <li><a href="#feedback">Venue</a></li>
+    <li><a href="#Venue">Venue</a></li>
+    <li><a href="#places">Destinations</a></li>
+    <li><a href="#Wishes">Your Wishes</a></li>
     <li><a href="#contact">Contact Us</a></li>
-  </ul>
-</nav>
-<br>
-<br>
+    </ul>
+  </nav>
 
+<br>
+<br>
 
   <section id="our-story">
     <h2>Our Story</h2>
@@ -58,6 +58,7 @@
       and refine the kind of partner we truly sought.
       All those paths led us here—to a love we had been waiting for all along.</p>
   </section>
+<br>
   
   <section id="Family">
     <h2>Family Details</h2>
@@ -68,16 +69,45 @@
       and refine the kind of partner we truly sought.
       All those paths led us here—to a love we had been waiting for all along.</p>
   </section>
+<br>
 
   <section id="memories">
-    <h2>Our Memories</h2>
-    <br>
-    <div class="gallery">
-      <img src="photo2.jpg" alt="Couple Photo">
-      <img src="photo3.jpg" alt="Family Photo">
+  <h2>Our Memories</h2>
+  <p>After a long journey filled with hope and heartache, we finally found each other.
+      Every unsuccessful match we met along the way helped us understand ourselves better
+      and refine the kind of partner we truly sought.
+      All those paths led us here—to a love we had been waiting for all along.</p>
+  <div class="carousel memories-carousel">
+    <div class="carousel-track">
+      
+      <!-- Photo 1 -->
+      <div class="carousel-slide">
+        <img src="Memories/Image_2.jpg" alt="Engagement Day">
+        <p>💍 Our beautiful engagement ceremony filled with love and laughter.</p>
+      </div>
+
+      <!-- Photo 2 -->
+      <div class="carousel-slide">
+        <img src="Memories/Image_3.jpg" alt="Family Gathering">
+        <p>👨‍👩‍👧‍👦 A special day with our families coming together.</p>
+      </div>
+
+      <!-- Photo 3 -->
+      <div class="carousel-slide">
+        <img src="Memories/Image_6.png" alt="Trip Together">
+        <p>🌸 Cherished trip that brought us even closer.</p>
+      </div>
+
+      <!-- Add more personal photos as needed -->
     </div>
-    <br>
-  </section>
+
+    <!-- Controls -->
+    <button class="carousel-btn prev">❮</button>
+    <button class="carousel-btn next">❯</button>
+  </div>
+</section>
+
+<br>
 
   <section>
     <!-- <h2>Wedding Venue</h2>
@@ -91,22 +121,7 @@ referrerpolicy="no-referrer-when-downgrade">
 </iframe> -->
   </section>
 
-  <section id="places">
-  <h2>Places to Visit</h2>
-  <p>...</p>
-</section>
-
-<section id="feedback">
-  <h2>Feedback</h2>
-  <p>...</p>
-</section>
-
-<section id="contact">
-  <h2>Contact Us</h2>
-  <p>...</p>
-</section>
-
-<section>
+  <section id="Venue">
   <h2>Wedding Venue</h2>
   <p>Golden Palace International Convention Centre, Trivandrum, Kerala</p>
   <a href="https://maps.app.goo.gl/MtXvQHZbJSeXsZU37" 
@@ -115,11 +130,120 @@ referrerpolicy="no-referrer-when-downgrade">
      📍 View on Google Maps
   </a>
 </section>
+<br>
+
+<section id="places">
+  <h2>Tourist Destinations</h2>
+  <div class="carousel">
+    <div class="carousel-track">
+      
+      <!-- Kuthiramalika -->
+      <div class="carousel-slide">
+        <a href="https://en.wikipedia.org/wiki/Kuthira_Malika" target="_blank">
+          <img src="Destinations/kuthiramalika.png" alt="Kuthiramalika Palace">
+        </a>
+        <p>🏰 Kuthiramalika Palace, built by Swathi Thirunal, is famous for its intricate wood carvings.</p>
+      </div>
+
+      <!-- Padmanabhaswamy Temple -->
+      <div class="carousel-slide">
+        <a href="https://en.wikipedia.org/wiki/Padmanabhaswamy_Temple" target="_blank">
+          <img src="Destinations/Sree-Padmanabhaswamy-Temple.png" alt="Padmanabhaswamy Temple">
+        </a>
+        <p>⛩ Padmanabhaswamy Temple, dedicated to Lord Vishnu, is one of India’s richest temples.</p>
+      </div>
+
+      <!-- Trivandrum Zoo -->
+      <div class="carousel-slide">
+        <a href="https://en.wikipedia.org/wiki/Thiruvananthapuram_Zoo" target="_blank">
+          <img src="Destinations/Trivandrum-Zoo.png" alt="Trivandrum Zoo">
+        </a>
+        <p>🦁 The Trivandrum Zoo, established in 1857, is home to diverse wildlife.</p>
+      </div>
+
+      <!-- Napier Museum -->
+      <div class="carousel-slide">
+        <a href="https://en.wikipedia.org/wiki/Napier_Museum" target="_blank">
+          <img src="Destinations/Napier-museum.png" alt="Napier Museum">
+        </a>
+        <p>🖼 The Napier Museum showcases Kerala’s rich cultural heritage and art.</p>
+      </div>
+
+      <!-- Kovalam Beach -->
+      <div class="carousel-slide">
+        <a href="https://en.wikipedia.org/wiki/Kovalam" target="_blank">
+          <img src="Destinations/lighthouse-at-kovalam-beach.png" alt="Kovalam Beach">
+        </a>
+        <p>🌴 Kovalam Beach is famous for its crescent-shaped shores and lighthouse.</p>
+      </div>
+
+      <!-- Poovar Islands -->
+      <div class="carousel-slide">
+        <a href="https://en.wikipedia.org/wiki/Poovar" target="_blank">
+          <img src="Destinations/Poovar-Islands.png" alt="Poovar Islands">
+        </a>
+        <p>🏝 Poovar Islands offer serene backwaters with golden sand and palm-fringed beauty.</p>
+      </div>
+
+      <!-- Padmanabhapuram Palace -->
+      <div class="carousel-slide">
+        <a href="https://en.wikipedia.org/wiki/Padmanabhapuram_Palace" target="_blank">
+          <img src="Destinations/Padmanabhapuram-Palace.png" alt="Padmanabhapuram Palace">
+        </a>
+        <p>🏰 Padmanabhapuram Palace is renowned for its wooden architecture and murals.</p>
+      </div>
+
+      <!-- Suchindram Temple -->
+      <div class="carousel-slide">
+        <a href="https://en.wikipedia.org/wiki/Suchindram" target="_blank">
+          <img src="Destinations/suchindram-kanyakumari.png" alt="Suchindram Temple">
+        </a>
+        <p>🛕 Suchindram Temple is dedicated to the Trinity and is famed for its musical pillars.</p>
+      </div>
+
+      <!-- Kanyakumari -->
+      <div class="carousel-slide">
+        <a href="https://en.wikipedia.org/wiki/Kanyakumari" target="_blank">
+          <img src="Destinations/kanyakumari.png" alt="Kanyakumari">
+        </a>
+        <p>🌅 Kanyakumari is the southern tip of India, known for its breathtaking sunrise and sunset views.</p>
+      </div>
+
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-btn prev">❮</button>
+    <button class="carousel-btn next">❯</button>
+  </div>
+</section>
+
+<section id="Wishes">
+  <h2>Your Wishes</h2>
+  <p>...</p>
+</section>
+
+<!-- <section id="contact">
+  <h2>Contact Us</h2>
+  <p>If you have any questions, feel free to reach us:</p>
+
+  <p>📞 <a href="tel:+911234567890">+91 12345 67890</a></p>
+  <p>📧 <a href="mailto:akshayaandanand@gmail.com">akshayaandanand@gmail.com</a></p>
+</section> -->
+
 
   <footer>
     <p>We can’t wait to celebrate with you! 💕</p>
   </footer>
   </div>
+  <!-- Contact Section -->
+<div class="contact-container">
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>If you have any questions, feel free to reach us: <br>
+    📞 <a href="tel:+911234567890">+91 12345 67890</a> <br> 📤 <a href="mailto:akshayaandanand@gmail.com">akshayaandanand@gmail.com</a></p>
+  </section>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
