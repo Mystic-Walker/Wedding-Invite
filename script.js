@@ -32,12 +32,46 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+//Navbar
+document.querySelectorAll('.navbar a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    if (link.getAttribute('href').startsWith("#")) {
+      e.preventDefault(); // Prevent default jump
+      
+      const targetId = link.getAttribute('href').substring(1);
+      const targetSection = document.getElementById(targetId);
+      
+      if (targetSection) {
+        const yOffset = -60; // adjust for sticky navbar height
+        const y = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+
+    // Collapse menu on mobile
+    if (window.innerWidth < 768) { 
+      menu.style.display = 'none';
+    }
+  });
+});
+
+
 // Hamburger icon
 const menuToggle = document.getElementById('menu-toggle');
 const menu = document.getElementById('menu');
 
 menuToggle.addEventListener('click', () => {
   menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+});
+
+// Close menu when a link is clicked (on mobile)
+document.querySelectorAll('.navbar a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 768) { 
+      menu.style.display = 'none';
+    }
+  });
 });
 
 // Carousel
@@ -122,4 +156,58 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   carousel.addEventListener('mouseenter', () => clearInterval(interval));
   carousel.addEventListener('mouseleave', () => startSlide());
 });
+
+//Wish Messages
+
+// document.getElementById("wishForm").addEventListener("submit", function(e) {
+//   e.preventDefault();
+//   const input = document.getElementById("wishInput");
+//   const wishText = input.value.trim();
+  
+//   if (wishText) {
+//     fetch(scriptURL, {
+//       method: "POST",
+//       body: JSON.stringify({ wish: wishText }),
+//       headers: { "Content-Type": "application/json" }
+//     })
+//     .then(res => res.json())
+//     .then(() => {
+//       const wishCard = document.createElement("div");
+//       wishCard.className = "wish-card";
+//       wishCard.textContent = wishText;
+//       document.getElementById("wishList").prepend(wishCard);
+//       input.value = "";
+//     })
+//     .catch(err => console.error("Error!", err));
+//   }
+// });
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbzWs6q2mgRAwlb3LyL5pNINyZ4gvX2PW0cD5T2L3oqYPta3El7HHYBacAsmaiO4Br5c/exec";
+
+document.getElementById("wishForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const input = document.getElementById("wishInput");
+  const wishText = input.value.trim();
+  if (!wishText) return;
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({ wish: wishText }),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Success:", data);
+    const wishCard = document.createElement("div");
+    wishCard.className = "wish-card";
+    wishCard.textContent = wishText;
+    document.getElementById("wishList").prepend(wishCard);
+    input.value = "";
+  })
+  .catch(err => {
+    console.error("Error submitting wish:", err);
+    alert("Could not submit your wish. Check Apps Script deployment.");
+  });
+});
+
 

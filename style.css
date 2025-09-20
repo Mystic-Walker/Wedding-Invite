@@ -1,5 +1,5 @@
 /* Loader full-screen */
-/* #loader {
+#loader {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,10 +11,10 @@
   justify-content: center;
   align-items: center;
   z-index: 9999;
-} */
+}
 
 /* Spinner animation */
-/* .spinner {
+.spinner {
   border: 6px solid #f3f3f3;
   border-top: 6px solid #ff758c;
   border-radius: 50%;
@@ -22,18 +22,21 @@
   height: 60px;
   animation: spin 1s linear infinite;
   margin-bottom: 15px;
-} */
+}
 
-/* @keyframes spin {
+@keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-} */
+}
 
 /* Hide loader after loading */
-/* body.loaded #loader {
+body.loaded #loader {
   display: none;
-} */
-
+}
+ 
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -265,13 +268,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: -10px;             /* in case there's any padding */
 }
 
-
-p {
-  font-family: 'Tangerine', cursive;
-  font-size: 1.8rem;   /* adjust size to make it readable */
-  line-height: 1.6;    /* spacing for elegance */
-  color: #333;         /* you can change to match your theme */
-}
 p {
   font-family: 'Handlee', cursive;
   font-size: 1.2rem;   /* adjust as needed */
@@ -279,37 +275,6 @@ p {
   color: #444;         /* you can change this to match your theme */
 }
 
-.venue {
-  padding: 40px 20px;
-  background: #fdf0f6;
-  border-radius: 12px;
-  margin: 30px auto;
-  max-width: 600px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.venue h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #a83279;
-}
-
-.venue p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-.map-link {
-  display: inline-block;
-  text-decoration: none;
-  background: linear-gradient(135deg, #ff7eb3, #ff758c);
-  color: white;
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-weight: bold;
-  transition: background 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
 
 .map-link:hover {
   background: linear-gradient(135deg, #ff758c, #ff7eb3);
@@ -322,7 +287,7 @@ p {
 }
 
 .memories-carousel {
-  max-width: 700px; /* smaller width for personal photos */
+  max-width: 900px; /* smaller width for personal photos */
   margin: 0 auto;
 }
 
@@ -448,6 +413,145 @@ p {
 
 .carousel-btn:hover {
   background: rgba(0,0,0,0.8);
+}
+
+/* Celebration venue */
+.venue-details {
+  font-size: 1.2 rem;
+  margin-bottom: 25px;
+  color: #444;
+}
+
+.map-container iframe {
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Wishes */
+.wishes-section {
+  padding: 60px 20px 40px 20px; /* plenty of top padding for title */
+  text-align: center;
+  background: #ebcedd;
+  border-radius: 20px;
+  max-width: 800px;
+  margin: 40px auto; /* centers the section */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+.wishes-section h2 {
+  font-family: 'Agbalumo', cursive;
+  font-size: 2rem;
+  color: #4e0d15;
+  margin-bottom: 30px;  /* space below heading */
+  line-height: 1.2;
+}
+
+#wishForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;            /* space between textarea and button */
+  margin-top: 15px;
+}
+
+#wishInput {
+  width: 90%;
+  max-width: 600px;     /* ensures it doesn’t stretch too far */
+  min-height: 100px;
+  padding: 15px;
+  border: 2px solid #a83279;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  resize: vertical;      /* allows vertical resizing only */
+}
+
+#wishForm button {
+  padding: 12px 25px;
+  border: none;
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  color: white;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#wishForm button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.wish-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 25px;
+  padding: 0 10px;
+}
+
+.wish-card {
+  background: blue;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: left;
+  font-family: 'Handlee', cursive;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+
+/* Destinations */
+.destinations-container h2 {
+  font-family: 'Agbalumo', cursive;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.destination-card {
+  display: block;
+  background: #ebcedd;
+  border-radius: 15px;
+  padding: 15px;
+  text-decoration: none;   /* removes underline */
+  color: inherit;          /* keeps normal text color */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.destination-card h3,
+.destination-card p {
+  text-decoration: none;   /* extra safety */
+}
+
+.destination-card:hover {
+  transform: translateY(-5px);
+}
+
+.destination-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.destination-card h3 {
+  font-size: 1.2rem;
+  color: #a83279;
+  margin: 10px 0 5px;
+}
+
+.destination-card p {
+  font-size: 1rem;
+  color: #444;
 }
 
 /* Contact-container */
