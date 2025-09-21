@@ -155,36 +155,53 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   // Pause on hover
   carousel.addEventListener('mouseenter', () => clearInterval(interval));
   carousel.addEventListener('mouseleave', () => startSlide());
+
+  // ✅ Swipe Support
+  let startX = 0;
+  let endX = 0;
+
+  carousel.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  carousel.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const threshold = 50; // min swipe distance
+    if (endX - startX > threshold) {
+      moveToPrev();
+      resetSlide();
+    } else if (startX - endX > threshold) {
+      moveToNext();
+      resetSlide();
+    }
+  }
 });
 
 //Wish Messages
-
-const scriptURL = "https://script.google.com/macros/s/AKfycbzWs6q2mgRAwlb3LyL5pNINyZ4gvX2PW0cD5T2L3oqYPta3El7HHYBacAsmaiO4Br5c/exec";
-
-document.getElementById("wishForm").addEventListener("submit", function(e) {
+const form = document.getElementById('wishForm');
+form.addEventListener('submit', e => {
   e.preventDefault();
-  const input = document.getElementById("wishInput");
-  const wishText = input.value.trim();
-  if (!wishText) return;
 
-  fetch(scriptURL, {
-    method: "POST",
-    body: JSON.stringify({ wish: wishText }),
-    headers: { "Content-Type": "application/json" }
+  const formData = new FormData(form);
+  const params = new URLSearchParams(formData);
+
+  fetch("https://script.google.com/macros/s/AKfycbxDjEUxBc__2-NMb8LtgkoxFSygC5_R8wV2CR1flsIaebKvhGA3Vm782UvzQGJXwdTlpQ/exec", { 
+    method: "POST", 
+    body: params 
   })
-  .then(res => res.json())
+  .then(response => response.json())
   .then(data => {
-    console.log("Success:", data);
-    const wishCard = document.createElement("div");
-    wishCard.className = "wish-card";
-    wishCard.textContent = wishText;
-    document.getElementById("wishList").prepend(wishCard);
-    input.value = "";
+    if(data.result === "success"){
+      alert("Thank you for your wish!");
+      form.reset();
+    }
   })
-  .catch(err => {
-    console.error("Error submitting wish:", err);
-    alert("Could not submit your wish. Check Apps Script deployment.");
-  });
+  .catch(error => alert("Error sending message: " + error));
 });
+
 
 
