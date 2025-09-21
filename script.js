@@ -182,9 +182,18 @@ document.querySelectorAll('.carousel').forEach(carousel => {
 });
 
 //Wish Messages
+
+// Auto-expand functionality
+const textarea = document.getElementById('message');
+textarea.addEventListener('input', () => {
+  textarea.style.height = 'auto';        // Reset height
+  textarea.style.height = textarea.scrollHeight + 'px'; // Adjust to content
+});
+
 const form = document.getElementById('wishForm');
 form.addEventListener('submit', e => {
   e.preventDefault();
+
 
   const formData = new FormData(form);
   const params = new URLSearchParams(formData);

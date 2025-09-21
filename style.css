@@ -51,6 +51,10 @@ body {
   background-attachment: fixed; /* keeps pattern fixed while scrolling */
 }
 
+section {
+  padding: 20px;
+}
+
 header video {
   width: 100%;
   height: auto;
@@ -155,6 +159,20 @@ header p {
     right: 10px;
     font-size: 1.2rem;
     padding: 8px 12px;
+  }
+}
+
+#music-toggle {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  #music-toggle {
+    font-size: 1.8rem; /* slightly larger on mobile */
   }
 }
 
@@ -591,11 +609,15 @@ p {
   color: #444;
 }
 
-.big-textarea {
+.auto-expand {
   width: 90%;
-  height: 150px;
+  min-height: 100px;
+  max-height: 500px;
   padding: 10px;
   font-size: 16px;
+  border-radius: none;
+  resize: none; /* Disable manual resizing */
+  overflow-y: hidden;
 }
 
 /* Destinations */
