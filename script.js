@@ -136,7 +136,7 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   });
 
   function startSlide() {
-    interval = setInterval(moveToNext, 3000);
+    interval = setInterval(moveToNext, 2500);
   }
 
   function resetSlide() {
@@ -158,29 +158,6 @@ document.querySelectorAll('.carousel').forEach(carousel => {
 });
 
 //Wish Messages
-
-// document.getElementById("wishForm").addEventListener("submit", function(e) {
-//   e.preventDefault();
-//   const input = document.getElementById("wishInput");
-//   const wishText = input.value.trim();
-  
-//   if (wishText) {
-//     fetch(scriptURL, {
-//       method: "POST",
-//       body: JSON.stringify({ wish: wishText }),
-//       headers: { "Content-Type": "application/json" }
-//     })
-//     .then(res => res.json())
-//     .then(() => {
-//       const wishCard = document.createElement("div");
-//       wishCard.className = "wish-card";
-//       wishCard.textContent = wishText;
-//       document.getElementById("wishList").prepend(wishCard);
-//       input.value = "";
-//     })
-//     .catch(err => console.error("Error!", err));
-//   }
-// });
 
 const scriptURL = "https://script.google.com/macros/s/AKfycbzWs6q2mgRAwlb3LyL5pNINyZ4gvX2PW0cD5T2L3oqYPta3El7HHYBacAsmaiO4Br5c/exec";
 
