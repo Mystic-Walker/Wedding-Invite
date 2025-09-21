@@ -136,7 +136,7 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   });
 
   function startSlide() {
-    interval = setInterval(moveToNext, 2500);
+    interval = setInterval(moveToNext, 4000);
   }
 
   function resetSlide() {
