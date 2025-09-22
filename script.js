@@ -75,28 +75,36 @@ document.querySelectorAll('.navbar a').forEach(link => {
 });
 
 // Carousel
+// Carousel (improved: pause-on-hold, swipe, no catch-up, single interval)
 document.querySelectorAll('.carousel').forEach(carousel => {
   const track = carousel.querySelector('.carousel-track');
-  const slides = carousel.querySelectorAll('.carousel-slide');
   const prevBtn = carousel.querySelector('.prev');
   const nextBtn = carousel.querySelector('.next');
 
-  let index = 1;
-  let interval;
+  // initial slides (will re-query after clones are added)
+  let slides = carousel.querySelectorAll('.carousel-slide');
 
-  // Clone first & last
+  // Clone first & last slides for infinite loop
   const firstClone = slides[0].cloneNode(true);
   const lastClone = slides[slides.length - 1].cloneNode(true);
-
   firstClone.id = "first-clone";
   lastClone.id = "last-clone";
 
   track.appendChild(firstClone);
-  track.insertBefore(lastClone, slides[0]);
+  track.insertBefore(lastClone, track.firstChild);
 
-  let slideWidth = slides[0].clientWidth;
+  // re-query slides (now includes clones)
+  slides = carousel.querySelectorAll('.carousel-slide');
+
+  // state
+  let index = 1;                 // start at first real slide
+  let intervalId = null;         // holds setInterval id
+  let slideWidth = track.children[index].clientWidth;
+
+  // set initial position
   track.style.transform = `translateX(-${slideWidth * index}px)`;
 
+  // move functions
   function moveToNext() {
     if (index >= track.children.length - 1) return;
     index++;
@@ -111,78 +119,150 @@ document.querySelectorAll('.carousel').forEach(carousel => {
     track.style.transform = `translateX(-${slideWidth * index}px)`;
   }
 
+  // after transition, if we're on a clone, jump to the corresponding real slide without transition
   track.addEventListener('transitionend', () => {
-    const allSlides = carousel.querySelectorAll('.carousel-slide');
-    if (track.children[index].id === firstClone.id) {
+    const children = track.children;
+    if (children[index].id === firstClone.id) {
       track.style.transition = "none";
       index = 1;
       track.style.transform = `translateX(-${slideWidth * index}px)`;
     }
-    if (track.children[index].id === lastClone.id) {
+    if (children[index].id === lastClone.id) {
       track.style.transition = "none";
-      index = allSlides.length - 2;
+      index = children.length - 2;
       track.style.transform = `translateX(-${slideWidth * index}px)`;
     }
   });
 
-  nextBtn.addEventListener('click', () => {
-    moveToNext();
-    resetSlide();
-  });
+  // prev/next button handlers
+  if (nextBtn) nextBtn.addEventListener('click', () => { moveToNext(); resetSlide(); });
+  if (prevBtn) prevBtn.addEventListener('click', () => { moveToPrev(); resetSlide(); });
 
-  prevBtn.addEventListener('click', () => {
-    moveToPrev();
-    resetSlide();
-  });
-
+  // Auto-play control (ensure only one interval runs)
   function startSlide() {
-    interval = setInterval(moveToNext, 4000);
+    if (intervalId !== null) return; // already running
+    intervalId = setInterval(() => {
+      moveToNext();
+    }, 4000);
+  }
+
+  function pauseSlide() {
+    if (intervalId !== null) {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
   }
 
   function resetSlide() {
-    clearInterval(interval);
+    pauseSlide();
     startSlide();
   }
 
+  // start autoplay
   startSlide();
 
-  // Responsive: recalc slideWidth on window resize
+  // responsive: recalc width and reposition
   window.addEventListener('resize', () => {
-    slideWidth = slides[0].clientWidth;
+    // recompute slideWidth from current visible child (index)
+    slideWidth = track.children[index].clientWidth;
+    // temporarily disable transition to reposition cleanly
+    track.style.transition = "none";
     track.style.transform = `translateX(-${slideWidth * index}px)`;
+    // allow transitions again for user interactions
+    // (no need to force reflow here)
   });
 
-  // Pause on hover
-  carousel.addEventListener('mouseenter', () => clearInterval(interval));
-  carousel.addEventListener('mouseleave', () => startSlide());
+  // pause on hover (desktop)
+  carousel.addEventListener('mouseenter', pauseSlide);
+  carousel.addEventListener('mouseleave', () => { /* only resume if not pointer down */ startSlide(); });
 
-  // ✅ Swipe Support
+  // Unified pointer-based hold + swipe handling (works for mouse & touch)
+  let pointerDown = false;
   let startX = 0;
-  let endX = 0;
+  let moved = false;
+  const SWIPE_THRESHOLD = 50; // px
 
-  carousel.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
+  // pointerdown covers mouse & touch in modern browsers
+  carousel.addEventListener('pointerdown', (e) => {
+    // only handle primary button (mouse) or touch
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    pointerDown = true;
+    startX = e.clientX;
+    moved = false;
+    // pause autoplay while held
+    pauseSlide();
+
+    // set pointer capture so we continue receiving pointer events even if finger/mouse moves outside
+    try { e.target.setPointerCapture(e.pointerId); } catch (err) { /* ignore if unsupported */ }
   });
 
-  carousel.addEventListener("touchend", (e) => {
-    endX = e.changedTouches[0].clientX;
-    handleSwipe();
+  carousel.addEventListener('pointermove', (e) => {
+    if (!pointerDown) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 10) moved = true; // small deadzone
+    // NOTE: we are NOT translating the track live (dragging) to keep logic simple.
   });
 
-  function handleSwipe() {
-    const threshold = 50; // min swipe distance
-    if (endX - startX > threshold) {
-      moveToPrev();
+  carousel.addEventListener('pointerup', (e) => {
+    if (!pointerDown) return;
+    pointerDown = false;
+    const endX = e.clientX;
+    const delta = endX - startX;
+
+    // release pointer capture
+    try { e.target.releasePointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+
+    // If user swiped far enough horizontally, navigate
+    if (moved && Math.abs(delta) > SWIPE_THRESHOLD) {
+      if (delta > 0) {
+        moveToPrev();
+      } else {
+        moveToNext();
+      }
+      // After a manual swipe, restart autoplay from the new slide
       resetSlide();
-    } else if (startX - endX > threshold) {
-      moveToNext();
-      resetSlide();
+    } else {
+      // No swipe (just a hold/release) — simply resume autoplay from current slide
+      startSlide();
     }
-  }
+  });
+
+  // pointercancel (like touchcancel) -> resume autoplay
+  carousel.addEventListener('pointercancel', () => {
+    pointerDown = false;
+    startSlide();
+  });
+
+  // For older browsers or if pointer events aren't available, keep touch fallback
+  // (these listeners will be ignored if pointer events fire)
+  carousel.addEventListener('touchstart', (e) => {
+    // If pointer events are supported the pointer handlers already did this; this is a safe fallback
+    if (window.PointerEvent) return;
+    startX = e.touches[0].clientX;
+    moved = false;
+    pauseSlide();
+  }, { passive: true });
+
+  carousel.addEventListener('touchmove', (e) => {
+    if (window.PointerEvent) return;
+    const dx = e.touches[0].clientX - startX;
+    if (Math.abs(dx) > 10) moved = true;
+  }, { passive: true });
+
+  carousel.addEventListener('touchend', (e) => {
+    if (window.PointerEvent) return;
+    const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : startX;
+    const delta = endX - startX;
+    if (moved && Math.abs(delta) > SWIPE_THRESHOLD) {
+      if (delta > 0) moveToPrev(); else moveToNext();
+      resetSlide();
+    } else {
+      startSlide();
+    }
+  });
 });
 
 //Wish Messages
-
 // Auto-expand functionality
 const textarea = document.getElementById('message');
 textarea.addEventListener('input', () => {
