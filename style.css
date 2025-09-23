@@ -285,6 +285,41 @@ p {
   color: #444;         /* you can change this to match your theme */
 }
 
+#Family {
+  font-family: 'Inria Serif', serif;
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#Family h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#Family p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 10px 0;
+  color: #444;
+}
+
+#Family img {
+  width: 300px; /* adjust size as needed */
+  height: auto;
+  border-radius: 12px;
+  margin: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+#Family img:hover {
+  transform: scale(1.05);
+}
+
 /* venue */
 .locations {
   display: flex;
