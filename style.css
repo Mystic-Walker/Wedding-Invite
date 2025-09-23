@@ -43,10 +43,10 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   /* Background image pattern */
-  background-image: url("Background.png"); /* replace with your actual file */
+  background-image: url("Background_pink_dots.png"); /* replace with your actual file */
   background-repeat: repeat; /* tile the image in both directions */
   background-size: auto;     /* use the image’s natural size */
-  background-size: 200px 200px; 
+  background-size: 500px 500px; 
 
   background-attachment: fixed; /* keeps pattern fixed while scrolling */
 }
@@ -65,20 +65,20 @@ header video {
 
 .banner-video{
   width: 100%;
-  max-height: 80vh; /* keeps video under screen height */
+  max-height: 100%; /* keeps video under screen height */
   object-fit: cover;
 }
 
 /* Main container */
 .container {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto; /* Center the container */
   text-align: center;
-  background: #efe2e9; /* Inside background (light, wedding-theme look) */
+  background: #f6e6ee; /* Inside background (light, wedding-theme look) */
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 .banner-container {
-  width: 1200px;           /* match your design width */
+  width: 900px;           /* match your design width */
   max-width: 100%;         /* still allow it to shrink on smaller screens */
   margin: 0 auto;          /* center the banner horizontally */
   overflow: hidden;        /* prevents overflow scrollbars */
