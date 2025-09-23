@@ -62,7 +62,8 @@ header video {
   object-fit: cover; /* ensures video fills without distortion */
   display: block;
 }
-.banner-video {
+
+.banner-video{
   width: 100%;
   max-height: 80vh; /* keeps video under screen height */
   object-fit: cover;
@@ -90,12 +91,13 @@ header video {
 }
 
 /* Header styling */
-
+/* Ensure header is positioned for relative child elements */
 header {
   position: relative;
   width: 100%;
   overflow: hidden;
   text-align: center;
+  display: inline-block;
 }
 
 header img {
@@ -105,12 +107,6 @@ header img {
   object-fit: cover;
   display: block;
   margin: 0 auto;
-}
-/* Ensure header is positioned for relative child elements */
-header {
-  position: relative;
-  display: inline-block;
-  width: 100%;
 }
 
 header h1, 
@@ -270,13 +266,6 @@ header p {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Agbaluma', sans-serif;
-  font-size: 2rem;   /* Adjust size (e.g., 40px = 2.5rem) */
-  color: #4e0d15;      /* Burgundy color example */
-  text-align: center;  /* Optional: Center headings */
-  /* -webkit-text-stroke: 0.0001px #efe2e9; Outline with background color to "thin" */
-}
-h1, h2, h3, h4, h5, h6 {
   font-family: 'Agbalumo', sans-serif;
   font-size: 2rem;   /* Adjust size (e.g., 40px = 2.5rem) */
   font-weight: lighter;
@@ -299,10 +288,6 @@ p {
 }
 
 /* Section styling */
-.places {
-  padding: 40px 20px;
-  text-align: center;
-}
 
 .memories-carousel {
   max-width: 900px; /* smaller width for personal photos */
@@ -330,14 +315,6 @@ p {
 .carousel-item {
   min-width: 100%; /* Each slide takes full container */
   box-sizing: border-box;
-}
-
-.carousel-item img {
-  width: 100%;
-  display: block;
-}
-
-.carousel-item {
   text-align: center;
   padding: 10px;
 }
@@ -345,6 +322,7 @@ p {
 .carousel-item img {
   width: 100%;
   height: auto;
+  display: block;
   border-radius: 10px;
   transition: transform 0.3s ease;
 }
@@ -398,11 +376,6 @@ p {
   object-fit: scale-down;
   transition: transform 0.3s ease;
 }
-/* .carousel-slide img {
-  border-radius: 12px;
-  object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-} */
 
 /* 📱 Mobile adjustments */
 @media (max-width: 768px) {
@@ -416,12 +389,6 @@ p {
     max-height: 200px;  /* smaller height on small phones */
   }
 }
-/* .carousel-slide img {
-  width: 100%;
-  height: 400px;
-  object-fit: contain;
-  background: #ebcedd;
-} */
 
 .carousel-slide img:hover {
   transform: scale(1.05); /* Slight zoom on hover */
@@ -624,6 +591,30 @@ p {
   resize: none; /* Disable manual resizing */
   overflow-y: hidden;
 }
+
+#custom-alert {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #fff0f6, #ffe4ec);
+  color: #b30059;
+  padding: 10px 18px;   /* smaller padding */
+  border-radius: 10px;  /* slightly smaller roundness */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  font-size: 16px;      /* smaller font */
+  font-family: "Georgia", serif;
+  z-index: 1000;
+  opacity: 0;
+  display: none;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transform: translateY(20px); /* start slightly lower */
+}
+#custom-alert.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0); /* soft slide-up */
+}
+
 
 /* Destinations */
 .destinations-container h2 {

@@ -274,7 +274,6 @@ const form = document.getElementById('wishForm');
 form.addEventListener('submit', e => {
   e.preventDefault();
 
-
   const formData = new FormData(form);
   const params = new URLSearchParams(formData);
 
@@ -285,12 +284,35 @@ form.addEventListener('submit', e => {
   .then(response => response.json())
   .then(data => {
     if(data.result === "success"){
-      alert("Thank you for your wish!");
+      showCustomAlert("Thank you for your wish! 💖");
       form.reset();
     }
   })
-  .catch(error => alert("Error sending message: " + error));
+  .catch(error => showCustomAlert("Error sending message ❌"));
 });
+
+// ✅ Custom Alert Function
+function showCustomAlert(message) {
+  let alertBox = document.getElementById("custom-alert");
+
+  // create alert box if not already there
+  if (!alertBox) {
+    alertBox = document.createElement("div");
+    alertBox.id = "custom-alert";
+    document.body.appendChild(alertBox);
+  }
+
+  alertBox.textContent = message;
+  alertBox.style.display = "block"; // make it visible
+  setTimeout(() => alertBox.classList.add("show"), 10); // trigger fade-in
+
+  // Auto hide after 2.5s
+  setTimeout(() => {
+    alertBox.classList.remove("show");
+    setTimeout(() => (alertBox.style.display = "none"), 600);
+  }, 2500);
+}
+
 
 
 
