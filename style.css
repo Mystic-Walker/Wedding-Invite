@@ -174,7 +174,7 @@ header p {
 
 /* Navbar base */
 .navbar {
-  background: #da6bae;
+  background: rgb(232, 194, 209);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -188,7 +188,7 @@ header p {
   padding: 0;
   display: none; /* hidden by default */
   flex-direction: column;
-  background: #da6bae;
+  background: #f6e6ee;
 }
 
 .navbar li {
@@ -197,7 +197,7 @@ header p {
 
 .navbar a {
   text-decoration: none;
-  color: white;
+  color: #5e3548;
   font-family: 'Agbalumo', sans-serif;
   font-size: 1rem;
   padding: 8px 15px;
@@ -206,22 +206,25 @@ header p {
 }
 
 .navbar a:hover {
-  background: #8e285f;
+  background: rgb(151, 110, 133);
   border-radius: 5px;
 }
 
 /* Hamburger icon */
 .menu-toggle {
   font-size: 1.5rem;
-  color: white;
+  color: #5e3548;
   cursor: pointer;
   display: block;
+  /* align-self: left; */
+  justify-content: left;
 }
 
 /* Desktop view (show menu inline, hide hamburger) */
 @media (min-width: 768px) {
   .menu-toggle {
     display: none;
+    justify-content: left;
   }
   .navbar ul {
     display: flex !important;
@@ -269,22 +272,53 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Agbalumo', sans-serif;
   font-size: 2rem;   /* Adjust size (e.g., 40px = 2.5rem) */
   font-weight: lighter;
-  color: #4e0d15;      /* Burgundy color example */
+  color: #5e3548;      /* Burgundy color example */
   text-align: center;  /* Optional: Center headings */
   margin: -20px;              /* removes all default space */
   padding: -10px;             /* in case there's any padding */
 }
 
 p {
-  font-family: 'Handlee', cursive;
+  font-family: 'Inria Serif', serif;
   font-size: 1.2rem;   /* adjust as needed */
   line-height: 1.6;
   color: #444;         /* you can change this to match your theme */
 }
 
+/* venue */
+.locations {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* space between church and venue */
+  flex-wrap: wrap; /* makes it stack nicely on mobile */
+  margin: 30px 0;
+}
 
-.map-link:hover {
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+.location-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  text-align: center;
+  max-width: 400px;
+  flex: 1;
+}
+
+.location-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.location-card h3{
+  font-family: 'Agbalumo', sans-serif;
+  font-size: 1.5rem;   /* Adjust size (e.g., 40px = 2.5rem) */
+  font-weight: lighter;
+  color: #644352;      /* Burgundy color example */
+  text-align: center;  /* Optional: Center headings */
+  margin: -20px;              /* removes all default space */
+  padding: -10px;             /* in case there's any padding */
 }
 
 /* Section styling */
@@ -334,7 +368,7 @@ p {
 .caption {
   margin-top: 8px;
   font-size: 1rem;
-  font-family: 'Tangerine', cursive; /* or another elegant font */
+  font-family: 'Inria Serif', serif; /* or another elegant font */
   color: #444;
 }
 
@@ -488,10 +522,28 @@ p {
   color: #444;
 }
 
-.map-container iframe {
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+.venue-img{
+  width: 1000px;
 }
+
+.map-link {
+  font-family: 'Inria Serif', serif;
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 8px 14px;
+  background: #bb84a0;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+
+.map-link:hover {
+  background: #6a4e5c; /* darker shade on hover */
+}
+
 
 /* Wishes */
 .wishes-section {
@@ -534,7 +586,7 @@ p {
 #wishForm button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-  background-color: #8e285f;
+  background-color: #6a4e5c;
 }
 
 .wish-list {
@@ -557,11 +609,12 @@ p {
 }
 
 #wishForm button {
+  font-family: 'Inria Serif', serif;
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 8px;
   border: none;
-  background-color: #da6bae;
+  background-color: #bb84a0; 
   color: white;
   cursor: pointer;
   margin-top: 5px;
@@ -576,7 +629,7 @@ p {
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   text-align: left;
-  font-family: 'Handlee', cursive;
+  font-family: 'Inria Serif', serif;
   font-size: 1.2rem;
   color: #444;
 }
@@ -597,7 +650,7 @@ p {
   bottom: 20px;
   right: 20px;
   background: linear-gradient(135deg, #fff0f6, #ffe4ec);
-  color: #b30059;
+  color: #cb6c9b;
   padding: 10px 18px;   /* smaller padding */
   border-radius: 10px;  /* slightly smaller roundness */
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
@@ -631,7 +684,7 @@ p {
 
 .destination-card {
   display: block;
-  background: #ebcedd;
+  background: #e9d4df;
   border-radius: 15px;
   padding: 15px;
   text-decoration: none;   /* removes underline */
@@ -657,71 +710,11 @@ p {
 
 .destination-card h3 {
   font-size: 1.2rem;
-  color: #a83279;
+  color: #6a4e5c;
   margin: 10px 0 5px;
 }
 
 .destination-card p {
   font-size: 1rem;
   color: #444;
-}
-
-/* Contact-container */
-.contact-container {
-  background: #fdf0f6;         /* soft pastel background */
-  padding: 40px 20px;
-  margin-top: 40px;
-  border-top: 3px solid #ff7eb3; /* subtle divider */
-  text-align: center;
-  border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-}
-
-.contact-container h2 {
-  font-family: 'Agbalumo', cursive; /* elegant heading font */
-  font-size: 2rem;
-  margin-bottom: 25px;
-  color: #a83279;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-}
-
-.contact-container p {
-  font-family: 'Tangerine', cursive;
-  font-size: 1.5rem;
-  margin: 12px 0;
-  line-height: 1.6;
-  color: #444;
-}
-
-/* Links as soft buttons */
-.contact-container a {
-  display: inline-block;
-  margin: 8px 10px;
-  padding: 12px 20px;
-  background: linear-gradient(135deg, #e68bb0, #eed0d5);
-  color: white;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: bold;
-  transition: background 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.contact-container a:hover {
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  transform: translateY(-3px);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .contact-container h2 {
-    font-size: 1.7rem;
-  }
-  .contact-container p {
-    font-size: 1.2rem;
-  }
-  .contact-container a {
-    padding: 10px 18px;
-    font-size: 1rem;
-  }
 }
