@@ -199,7 +199,7 @@ header p {
   text-decoration: none;
   color: #5e3548;
   font-family: 'Agbalumo', sans-serif;
-  font-size: 1rem;
+  font-size: 1.3rem;
   padding: 8px 15px;
   display: block;
   transition: background 0.3s ease;
@@ -296,8 +296,7 @@ p {
 
 #Family h2 {
   font-size: 2rem;
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 8px;
 }
 
 #Family p {
@@ -321,6 +320,23 @@ p {
 }
 
 /* venue */
+#Venue {
+  text-align: center;
+  padding: 40px 20px;
+  font-family: 'Inria Serif', serif;
+}
+
+#Venue h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.venue-details {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+/* Layout for location cards */
 .locations {
   display: flex;
   justify-content: center;
@@ -335,25 +351,63 @@ p {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 15px;
   text-align: center;
-  max-width: 400px;
-  flex: 1;
+  max-width: 500px;
+  flex: 1 1 45%; /* responsive width */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.location-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .location-card img {
   width: 100%;
-  height: auto;
+  height: 250px;
+  object-fit: cover;
   border-radius: 12px;
   margin-bottom: 12px;
 }
 
 .location-card h3{
   font-family: 'Agbalumo', sans-serif;
-  font-size: 1.5rem;   /* Adjust size (e.g., 40px = 2.5rem) */
+  font-size: 1.3rem;
   font-weight: lighter;
-  color: #644352;      /* Burgundy color example */
-  text-align: center;  /* Optional: Center headings */
-  margin: -20px;              /* removes all default space */
-  padding: -10px;             /* in case there's any padding */
+  color: #644352;    
+  text-align: center; 
+  margin: -20px;
+  padding: 10px;
+}
+.location-card p{
+  font-size: 1.0rem;
+}
+/* Celebration venue */
+.map-link {
+  font-family: 'Inria Serif', serif;
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 8px 14px;
+  background: #bb84a0;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+.map-link:hover {
+  background: #6a4e5c; /* darker shade on hover */
+}
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .locations {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .location-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }
 
 /* Section styling */
@@ -550,36 +604,6 @@ p {
   }
 }
 
-/* Celebration venue */
-.venue-details {
-  font-size: 1.2 rem;
-  margin-bottom: 25px;
-  color: #444;
-}
-
-.venue-img{
-  width: 1000px;
-}
-
-.map-link {
-  font-family: 'Inria Serif', serif;
-  display: inline-block;
-  margin-bottom: 15px;
-  padding: 8px 14px;
-  background: #bb84a0;
-  color: #fff;
-  border-radius: 8px;
-  font-size: 14px;
-  text-decoration: none;
-  transition: background 0.3s ease;
-}
-
-
-.map-link:hover {
-  background: #6a4e5c; /* darker shade on hover */
-}
-
-
 /* Wishes */
 .wishes-section {
   padding: 60px 20px 40px 20px; /* plenty of top padding for title */
@@ -708,13 +732,12 @@ p {
 .destinations-container h2 {
   font-family: 'Agbalumo', cursive;
   font-size: 2rem;
-  margin-bottom: 30px;
 }
 
 .destinations-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 15px;
 }
 
 .destination-card {
