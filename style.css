@@ -329,7 +329,7 @@ p {
   margin: 0; /* remove default margin */
 }
 
-/* venue */
+/* Venue Section */
 #Venue {
   text-align: center;
   font-family: 'Inria Serif', serif;
@@ -337,96 +337,129 @@ p {
 
 #Venue h2 {
   font-size: 2rem;
+  margin-bottom: 20px;
 }
 
-.venue-details {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-/* Layout for location cards */
 .locations {
   display: flex;
   justify-content: center;
-  gap: 20px; /* space between church and venue */
-  flex-wrap: wrap; /* makes it stack nicely on mobile */
+  align-items: stretch; /* equal height alignment */
+  gap: 20px;
   margin: 30px 0;
+  flex-wrap: nowrap; /* keep side by side always */
 }
 
+/* Venue Card */
 .location-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* pushes content to top and bottom */
-  align-items: center;
-  width: 45%; /* roughly half the container on desktop */
-  padding: 15px;
+  width: 50%; /* exactly half screen each */
+  max-width: 480px;
+  min-height: 600px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   border-radius: 12px;
   background-color: #fff;
   text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.location-card { max-width: 400px; height: 600px; margin-bottom: 20px; overflow: hidden; }
+
 .location-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
 
-.location-card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
-.location-card h3{
+/* Uniform spacing */
+.location-card h3 {
   font-family: 'Agbalumo', sans-serif;
   font-size: 1.3rem;
   font-weight: lighter;
-  color: #644352;    
-  text-align: center; 
-  padding: 10px;
-  justify-content: space-between; /* push content to top & bottom */
-}
-.location-card p{
-  font-size: 1.0rem;
+  color: #644352;
+  margin-top: 10px;   /* uniform top spacing */
+  margin-bottom: 12px; /* spacing before image */
 }
 
-.location-card .venue-details {
-  margin-bottom: 8px; /* reduce gap between paragraph and link */
+.location-card img {
+  width: 90%;              /* shrink image slightly */
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  margin: 0 auto 12px;     /* centers image + bottom gap */
+  display: block;          /* ensures centering works */
 }
-.location-card .map-link {
-  text-decoration: none;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 8px;
-  transition: background-color 0.3s;
+
+/* Description (just below image) */
+.venue-details {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: auto; /* pushes venue-info down */
 }
+
+/* Venue Info (sticks above map link) */
+.venue-info {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* centers button horizontally */
+  gap: 10px;
+  margin-top: auto;     /* pushes it to bottom */
+  width: 100%;
+  padding-bottom: 12px;   /* adds spacing from bottom edge */
+}
+
+.venue-info p {
+  font-size: 0.95rem;
+  margin: 10px;
+}
+
+/* Map Button */
 .map-link {
   font-family: 'Inria Serif', serif;
-  display: inline-block;
-  padding: 8px 14px;
+  display: block;
+  width: 50%;              /* half width of the container */
+  text-align: center;      /* centers the text inside */
+  padding: 8px 0;          /* balanced vertical padding */
   background: #bb84a0;
   color: #fff;
   border-radius: 8px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   text-decoration: none;
   transition: background 0.3s ease;
 }
+
 .map-link:hover {
-  background: #6a4e5c; /* darker shade on hover */
+  background: #6a4e5c;
 }
-/* Responsive behavior */
+
+.location-card p {
+  font-size: 1rem;
+  padding: 0 12px;   /* adds left & right spacing */
+  line-height: 1.6;
+}
+
+/* Always side by side, even on small screens */
 @media (max-width: 768px) {
   .locations {
-    flex-direction: column;
-    align-items: center;
+    gap: 10px;
   }
 
   .location-card {
-    flex: 1 1 100%;
-    max-width: 100%;
+    width: 50%; /* two equal halves */
+    min-height: auto;
+    padding: 12px;
+  }
+
+  .location-card h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    white-space: normal; /* wrap text, avoid overflow behind image */
+  }
+
+  .location-card img {
+    height: 180px;
   }
 }
+
+
 
 /* Section styling */
 
@@ -510,7 +543,7 @@ p {
 
 .carousel-slide p {
   font-family: 'Tangerine', cursive;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-top: 10px;
   color: #444;
 }
