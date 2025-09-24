@@ -378,7 +378,6 @@ p {
   justify-content: space-between; /* pushes content to top and bottom */
   align-items: center;
   width: 45%; /* roughly half the container on desktop */
-  max-width: 400px; /* optional max width */
   padding: 15px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   border-radius: 12px;
