@@ -32,30 +32,30 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-//Navbar
+// Navbar
 document.querySelectorAll('.navbar a').forEach(link => {
   link.addEventListener('click', (e) => {
     if (link.getAttribute('href').startsWith("#")) {
       e.preventDefault(); // Prevent default jump
-      
+
       const targetId = link.getAttribute('href').substring(1);
       const targetSection = document.getElementById(targetId);
-      
+
       if (targetSection) {
-        const yOffset = -60; // adjust for sticky navbar height
+        // ✅ Adjust offset based on screen size
+        const yOffset = window.innerWidth < 768 ? -100 : -60; 
         const y = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        
+
         window.scrollTo({ top: y, behavior: 'smooth' });
       }
     }
 
     // Collapse menu on mobile
-    if (window.innerWidth < 768) { 
+    if (window.innerWidth < 768) {
       menu.style.display = 'none';
     }
   });
 });
-
 
 // Hamburger icon
 const menuToggle = document.getElementById('menu-toggle');
@@ -68,11 +68,12 @@ menuToggle.addEventListener('click', () => {
 // Close menu when a link is clicked (on mobile)
 document.querySelectorAll('.navbar a').forEach(link => {
   link.addEventListener('click', () => {
-    if (window.innerWidth < 768) { 
+    if (window.innerWidth < 768) {
       menu.style.display = 'none';
     }
   });
 });
+
 
 // Carousel
 // Carousel (improved: pause-on-hold, swipe, no catch-up, single interval)

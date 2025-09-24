@@ -319,16 +319,43 @@ p {
   transform: scale(1.05);
 }
 
+.family-photos {
+  display: flex;
+  justify-content: center;
+  /* gap: 2rem; */
+  flex-wrap: wrap;
+  /* margin-top: 1.5rem; */
+}
+
+.family-photos figure {
+  text-align: center;
+  margin: 0; /* remove extra spacing */
+}
+
+.family-photos img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px; /* rounded corners */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: block;
+  margin-bottom: 0.3rem; /* small gap between image and caption */
+}
+
+.family-photos figcaption {
+  font-size: 0.95rem;
+  color: #444;
+  font-style: italic;
+  margin: 0; /* remove default margin */
+}
+
 /* venue */
 #Venue {
   text-align: center;
-  padding: 40px 20px;
   font-family: 'Inria Serif', serif;
 }
 
 #Venue h2 {
   font-size: 2rem;
-  margin-bottom: 30px;
 }
 
 .venue-details {
@@ -346,16 +373,35 @@ p {
 }
 
 .location-card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* pushes content to top and bottom */
+  align-items: center;
+  width: 45%; /* roughly half the container on desktop */
+  max-width: 400px; /* optional max width */
   padding: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  background-color: #fff;
   text-align: center;
-  max-width: 500px;
-  flex: 1 1 45%; /* responsive width */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* margin-bottom: 20px; */
 }
-
+.location-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 45%;
+  max-width: 400px;
+  height: 600px; /* fix height for the card */
+  padding: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  background-color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+  overflow: hidden; /* keep content inside */
+}
 .location-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
@@ -366,7 +412,7 @@ p {
   height: 250px;
   object-fit: cover;
   border-radius: 12px;
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
 }
 
 .location-card h3{
@@ -375,17 +421,28 @@ p {
   font-weight: lighter;
   color: #644352;    
   text-align: center; 
-  margin: -20px;
+  /* margin: -20px; */
   padding: 10px;
+  justify-content: space-between; /* push content to top & bottom */
 }
 .location-card p{
   font-size: 1.0rem;
 }
-/* Celebration venue */
+
+.location-card .venue-details {
+  margin-bottom: 8px; /* reduce gap between paragraph and link */
+}
+.location-card .map-link {
+  text-decoration: none;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
 .map-link {
   font-family: 'Inria Serif', serif;
   display: inline-block;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   padding: 8px 14px;
   background: #bb84a0;
   color: #fff;
