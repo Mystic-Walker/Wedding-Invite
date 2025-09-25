@@ -463,41 +463,16 @@ p {
 
 /* Section styling */
 
+/* Memories Carousel */
 .memories-carousel {
-  max-width: 900px; /* smaller width for personal photos */
-  margin: 0 auto;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .carousel-slide p {
-    font-size: 1rem;
-  }
-
-  .carousel-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 1.5rem;
-  }
-}
-
-/* removed unused .carousel-track-container and .carousel-item styles */
-
-/* removed unused .caption styles */
-
-.prev { left: 10px; }
-.next { right: 10px; }
-
-/* Carousel Container */
-.carousel {
+  max-width: 900px;   
+  margin: 20px auto;
   position: relative;
-  width: 100%;
-  margin: auto;
   overflow: hidden;
   border-radius: 12px;
-  margin: 20px auto;
 }
 
+/* Track */
 .carousel-track {
   display: flex;
   transition: transform 0.6s ease-in-out;
@@ -505,76 +480,63 @@ p {
 
 /* Each slide */
 .carousel-slide {
-  min-width: 100%; /* Full width for each slide */
-  text-align: center;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
   box-sizing: border-box;
-  display: flex;
-  transition: transform 0.5s ease-in-out;
+  text-align: center;
 }
 
-/* Images inside slides */
+/* Fixed square container for images */
 .carousel-slide img {
   width: 100%;
-  height: auto;
+  max-width: 1080px;
+  aspect-ratio: 1 / 1;     /* keeps container square */
+  object-fit: contain;     /* ensures no cropping/stretching */
   border-radius: 12px;
+  background: #e9d4df;     /* neutral background behind images */
   cursor: pointer;
-  max-height: 400px;
-  object-fit: scale-down;
   transition: transform 0.3s ease;
 }
 
-/* 📱 Mobile adjustments */
-@media (max-width: 768px) {
-  .carousel-slide img {
-    max-height: 250px;  /* smaller height on tablets/phones */
-  }
-}
-
-@media (max-width: 480px) {
-  .carousel-slide img {
-    max-height: 200px;  /* smaller height on small phones */
-  }
-}
-
+/* Hover zoom */
 .carousel-slide img:hover {
-  transform: scale(1.05); /* Slight zoom on hover */
+  transform: scale(1.05);
 }
 
+/* Captions */
 .carousel-slide p {
-  font-family: 'Tangerine', cursive;
+  font-family: 'Inria Serif', serif;
   font-size: 1.1rem;
   margin-top: 10px;
   color: #444;
+  padding: 0 10px;
 }
 
-/* Carousel Buttons */
+/* Buttons */
 .carousel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   border: none;
   color: white;
   font-size: 1.8rem;
   width: 45px;
   height: 45px;
-  border-radius: 50%;  /* makes button round */
+  border-radius: 50%;
   cursor: pointer;
   z-index: 2;
   transition: background 0.3s ease;
 }
 
-.carousel-btn.prev {
-  left: 15px;
-}
-
-.carousel-btn.next {
-  right: 15px;
-}
+.carousel-btn.prev { left: 15px; }
+.carousel-btn.next { right: 15px; }
 
 .carousel-btn:hover {
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 /* Dots */
@@ -591,42 +553,31 @@ p {
   height: 12px;
   width: 12px;
   margin: 0 5px;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 50%;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .carousel-dots span.active {
-  background: #ff7eb3; /* your wedding pink */
+  background: #ff7eb3;
   transform: scale(1.2);
 }
 
 /* 📱 Responsiveness */
 @media (max-width: 768px) {
-  .carousel button {
+  .carousel-slide img {
+    max-width: 100%;
+    max-height: 80vw;    /* keeps square scaling down */
+  }
+
+  .carousel-btn {
+    width: 35px;
+    height: 35px;
     font-size: 1.5rem;
-    padding: 6px 10px;
-  }
-
-  .carousel-dots span {
-    height: 10px;
-    width: 10px;
   }
 }
-
-@media (max-width: 480px) {
-  .carousel button {
-    font-size: 1.2rem;
-    padding: 4px 8px;
-  }
-
-  .carousel-dots span {
-    height: 8px;
-    width: 8px;
-    margin: 0 3px;
-  }
-}
+  .carous
 
 /* Wishes */
 .wishes-section {
