@@ -403,7 +403,7 @@ p {
   color: #644352;
   margin-top: 10px;     /* uniform top spacing */
   margin-bottom: 12px;  /* spacing before image */
-  width: 80%;           /* ensures text fills at least 80% of container */
+  width:97%;           /* ensures text fills at least 97% of container */
   text-align: center;   /* keeps it centered within container */
   margin-left: auto;    
   margin-right: auto;   /* centers the block */
@@ -496,12 +496,11 @@ p {
   .location-card {
     width: 50%; /* two equal halves */
     min-height: auto;
-    padding: 12px;
+    /* padding: 12px; */
   }
 
   .location-card h3 {
     font-size: 1rem;
-    margin-bottom: 8px;
     white-space: normal; /* wrap text, avoid overflow behind image */
   }
 
