@@ -435,6 +435,8 @@ p {
   object-fit: cover;      /* images scale inside space */
   margin: 5px 0;          /* equal spacing between images */
   display: flex;
+  border-radius: 12px;
+  width: 100%;                      /* scale image width to container */
 }
 
 /* Description (just below image) */
@@ -507,6 +509,7 @@ p {
     height: 180px;
   }
 }
+
 
 /* Section styling */
 
