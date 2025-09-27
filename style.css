@@ -510,12 +510,7 @@ p {
   padding: 0 12px;   /* adds left & right spacing */
   line-height: 1.6;
 }
-/* Hide the 3rd image in the 2nd venue card on smaller screens */
-/* @media (max-width: 768px) {
-  .location-card:nth-child(2) img:nth-of-type(3) {
-    display: none;
-  }
-} */
+
 }
 
 
@@ -635,7 +630,6 @@ p {
     font-size: 1.5rem;
   }
 }
-  .carous
 
 /* Wishes */
 .wishes-section {
@@ -732,7 +726,7 @@ p {
   max-height: 500px;
   padding: 10px;
   font-size: 16px;
-  border-radius: none;
+  border-radius: 12px;
   resize: none; /* Disable manual resizing */
   overflow-y: hidden;
 }

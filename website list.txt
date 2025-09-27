@@ -1,3 +1,0 @@
-Components required for the website
-1. Add Map by tomorrow
-2. remove venue x2

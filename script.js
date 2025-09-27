@@ -1,3 +1,4 @@
+//loading
 window.addEventListener("load", () => {
   document.body.classList.add("loaded");
 });
@@ -37,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Navbar
 document.querySelectorAll('.navbar a').forEach(link => {
   link.addEventListener('click', (e) => {
     if (link.getAttribute('href').startsWith("#")) {
@@ -60,6 +62,7 @@ document.querySelectorAll('.navbar a').forEach(link => {
   });
 });
 
+//Hamburger icon
 const menuToggle = document.getElementById('menu-toggle');
 const menu = document.getElementById('menu');
 
@@ -67,6 +70,7 @@ menuToggle.addEventListener('click', () => {
   menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
 });
 
+// Close menu when a link is clicked (on mobile)
 document.querySelectorAll('.navbar a').forEach(link => {
   link.addEventListener('click', () => {
     if (window.innerWidth < 768) {
@@ -75,170 +79,177 @@ document.querySelectorAll('.navbar a').forEach(link => {
   });
 });
 
+// Carousel
+// Carousel (improved: pause-on-hold, swipe, no catch-up, single interval)
+// Wait until DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.carousel').forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    const prevBtn = carousel.querySelector('.prev');
+    const nextBtn = carousel.querySelector('.next');
 
-document.querySelectorAll('.carousel').forEach(carousel => {
-  const track = carousel.querySelector('.carousel-track');
-  const prevBtn = carousel.querySelector('.prev');
-  const nextBtn = carousel.querySelector('.next');
+    // Get initial slides
+    let slides = carousel.querySelectorAll('.carousel-slide');
+    if (!slides || slides.length === 0) {
+      console.warn("No .carousel-slide elements found in carousel:", carousel);
+      return; // stop if no slides
+    }
 
-  let slides = carousel.querySelectorAll('.carousel-slide');
+    // Clone first & last slides for infinite loop
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[slides.length - 1].cloneNode(true);
+    firstClone.id = "first-clone";
+    lastClone.id = "last-clone";
 
-  const firstClone = slides[0].cloneNode(true);
-  const lastClone = slides[slides.length - 1].cloneNode(true);
-  firstClone.id = "first-clone";
-  lastClone.id = "last-clone";
+    track.appendChild(firstClone);
+    track.insertBefore(lastClone, track.firstChild);
 
-  track.appendChild(firstClone);
-  track.insertBefore(lastClone, track.firstChild);
+    // Re-query slides (now includes clones)
+    slides = carousel.querySelectorAll('.carousel-slide');
 
-  slides = carousel.querySelectorAll('.carousel-slide');
+    // State
+    let index = 1; // start at first real slide
+    let intervalId = null;
+    let slideWidth = carousel.clientWidth;
 
-  let index = 1;                 // start at first real slide
-  let intervalId = null;         // holds setInterval id
-  let slideWidth = track.children[index].clientWidth;
-
-  track.style.transform = `translateX(-${slideWidth * index}px)`;
-
-  function moveToNext() {
-    if (index >= track.children.length - 1) return;
-    index++;
-    track.style.transition = "transform 0.5s ease-in-out";
+    // Set initial position
     track.style.transform = `translateX(-${slideWidth * index}px)`;
-  }
 
-  function moveToPrev() {
-    if (index <= 0) return;
-    index--;
-    track.style.transition = "transform 0.5s ease-in-out";
-    track.style.transform = `translateX(-${slideWidth * index}px)`;
-  }
-
-  track.addEventListener('transitionend', () => {
-    const children = track.children;
-    if (children[index].id === firstClone.id) {
-      track.style.transition = "none";
-      index = 1;
+    // Move functions
+    function moveToNext() {
+      if (index >= slides.length - 1) return;
+      index++;
+      track.style.transition = "transform 0.5s ease-in-out";
       track.style.transform = `translateX(-${slideWidth * index}px)`;
     }
-    if (children[index].id === lastClone.id) {
-      track.style.transition = "none";
-      index = children.length - 2;
+
+    function moveToPrev() {
+      if (index <= 0) return;
+      index--;
+      track.style.transition = "transform 0.5s ease-in-out";
       track.style.transform = `translateX(-${slideWidth * index}px)`;
     }
-  });
 
-  if (nextBtn) nextBtn.addEventListener('click', () => { moveToNext(); resetSlide(); });
-  if (prevBtn) prevBtn.addEventListener('click', () => { moveToPrev(); resetSlide(); });
-
-  function startSlide() {
-    if (intervalId !== null) return; // already running
-    intervalId = setInterval(() => {
-      moveToNext();
-    }, 4000);
-  }
-
-  function pauseSlide() {
-    if (intervalId !== null) {
-      clearInterval(intervalId);
-      intervalId = null;
-    }
-  }
-
-  function resetSlide() {
-    pauseSlide();
-    startSlide();
-  }
-
-  startSlide();
-
-  window.addEventListener('resize', () => {
-    // recompute slideWidth from current visible child (index)
-    slideWidth = track.children[index].clientWidth;
-    // temporarily disable transition to reposition cleanly
-    track.style.transition = "none";
-    track.style.transform = `translateX(-${slideWidth * index}px)`;
-    // allow transitions again for user interactions
-    // (no need to force reflow here)
-  });
-
-  carousel.addEventListener('mouseenter', pauseSlide);
-  carousel.addEventListener('mouseleave', () => { /* only resume if not pointer down */ startSlide(); });
-
-  let pointerDown = false;
-  let startX = 0;
-  let moved = false;
-  const SWIPE_THRESHOLD = 50; // px
-
-  carousel.addEventListener('pointerdown', (e) => {
-    // only handle primary button (mouse) or touch
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
-    pointerDown = true;
-    startX = e.clientX;
-    moved = false;
-    // pause autoplay while held
-    pauseSlide();
-
-    try { e.target.setPointerCapture(e.pointerId); } catch (err) { /* ignore if unsupported */ }
-  });
-
-  carousel.addEventListener('pointermove', (e) => {
-    if (!pointerDown) return;
-    const dx = e.clientX - startX;
-    if (Math.abs(dx) > 10) moved = true; // small deadzone
-  });
-
-  carousel.addEventListener('pointerup', (e) => {
-    if (!pointerDown) return;
-    pointerDown = false;
-    const endX = e.clientX;
-    const delta = endX - startX;
-
-    try { e.target.releasePointerCapture(e.pointerId); } catch (err) { /* ignore */ }
-
-    if (moved && Math.abs(delta) > SWIPE_THRESHOLD) {
-      if (delta > 0) {
-        moveToPrev();
-      } else {
-        moveToNext();
+    // After transition, reset if on clone
+    track.addEventListener('transitionend', () => {
+      if (slides[index].id === "first-clone") {
+        track.style.transition = "none";
+        index = 1;
+        track.style.transform = `translateX(-${slideWidth * index}px)`;
       }
-      resetSlide();
-    } else {
+      if (slides[index].id === "last-clone") {
+        track.style.transition = "none";
+        index = slides.length - 2;
+        track.style.transform = `translateX(-${slideWidth * index}px)`;
+      }
+    });
+
+    // Button handlers
+    if (nextBtn) nextBtn.addEventListener('click', () => { moveToNext(); resetSlide(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { moveToPrev(); resetSlide(); });
+
+    // Autoplay
+    function startSlide() {
+      if (intervalId !== null) return;
+      intervalId = setInterval(moveToNext, 4000);
+    }
+
+    function pauseSlide() {
+      if (intervalId !== null) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    }
+
+    function resetSlide() {
+      pauseSlide();
       startSlide();
     }
-  });
 
-  carousel.addEventListener('pointercancel', () => {
-    pointerDown = false;
     startSlide();
-  });
 
-  carousel.addEventListener('touchstart', (e) => {
-    // If pointer events are supported the pointer handlers already did this; this is a safe fallback
-    if (window.PointerEvent) return;
-    startX = e.touches[0].clientX;
-    moved = false;
-    pauseSlide();
-  }, { passive: true });
+    // Recalculate width on resize
+    window.addEventListener('resize', () => {
+      slideWidth = carousel.clientWidth;
+      track.style.transition = "none";
+      track.style.transform = `translateX(-${slideWidth * index}px)`;
+    });
 
-  carousel.addEventListener('touchmove', (e) => {
-    if (window.PointerEvent) return;
-    const dx = e.touches[0].clientX - startX;
-    if (Math.abs(dx) > 10) moved = true;
-  }, { passive: true });
+    // Pause on hover
+    carousel.addEventListener('mouseenter', pauseSlide);
+    carousel.addEventListener('mouseleave', startSlide);
 
-  carousel.addEventListener('touchend', (e) => {
-    if (window.PointerEvent) return;
-    const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : startX;
-    const delta = endX - startX;
-    if (moved && Math.abs(delta) > SWIPE_THRESHOLD) {
-      if (delta > 0) moveToPrev(); else moveToNext();
-      resetSlide();
-    } else {
+    // Pointer/touch swipe handling
+    let pointerDown = false;
+    let startX = 0;
+    let moved = false;
+    const SWIPE_THRESHOLD = 50;
+
+    carousel.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      pointerDown = true;
+      startX = e.clientX;
+      moved = false;
+      pauseSlide();
+      try { e.target.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+
+    carousel.addEventListener('pointermove', (e) => {
+      if (!pointerDown) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 10) moved = true;
+    });
+
+    carousel.addEventListener('pointerup', (e) => {
+      if (!pointerDown) return;
+      pointerDown = false;
+      const delta = e.clientX - startX;
+      try { e.target.releasePointerCapture(e.pointerId); } catch (err) {}
+      if (moved && Math.abs(delta) > SWIPE_THRESHOLD) {
+        if (delta > 0) moveToPrev(); else moveToNext();
+        resetSlide();
+      } else {
+        startSlide();
+      }
+    });
+
+    carousel.addEventListener('pointercancel', () => {
+      pointerDown = false;
       startSlide();
-    }
+    });
+
+    // Touch fallback (for older browsers)
+    carousel.addEventListener('touchstart', (e) => {
+      if (window.PointerEvent) return;
+      startX = e.touches[0].clientX;
+      moved = false;
+      pauseSlide();
+    }, { passive: true });
+
+    carousel.addEventListener('touchmove', (e) => {
+      if (window.PointerEvent) return;
+      const dx = e.touches[0].clientX - startX;
+      if (Math.abs(dx) > 10) moved = true;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+      if (window.PointerEvent) return;
+      const delta = (e.changedTouches && e.changedTouches[0]) 
+        ? e.changedTouches[0].clientX - startX 
+        : 0;
+      if (moved && Math.abs(delta) > SWIPE_THRESHOLD) {
+        if (delta > 0) moveToPrev(); else moveToNext();
+        resetSlide();
+      } else {
+        startSlide();
+      }
+    });
   });
 });
 
+
+//Wish Messages
+// Auto-expand functionality
 const textarea = document.getElementById('message');
 textarea.addEventListener('input', () => {
   textarea.style.height = 'auto';        // Reset height
@@ -266,9 +277,11 @@ form.addEventListener('submit', e => {
   .catch(error => showCustomAlert("Error sending message ❌"));
 });
 
+// ✅ Custom Alert Function
 function showCustomAlert(message) {
   let alertBox = document.getElementById("custom-alert");
 
+  // create alert box if not already there
   if (!alertBox) {
     alertBox = document.createElement("div");
     alertBox.id = "custom-alert";
@@ -276,15 +289,12 @@ function showCustomAlert(message) {
   }
 
   alertBox.textContent = message;
-  alertBox.style.display = "block";
-  setTimeout(() => alertBox.classList.add("show"), 10);
+  alertBox.style.display = "block"; // make it visible
+  setTimeout(() => alertBox.classList.add("show"), 10); // trigger fade-in
 
+  // Auto hide after 2.5s
   setTimeout(() => {
     alertBox.classList.remove("show");
     setTimeout(() => (alertBox.style.display = "none"), 600);
   }, 2500);
 }
-
-
-
-
