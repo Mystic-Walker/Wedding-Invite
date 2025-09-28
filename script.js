@@ -264,7 +264,7 @@ form.addEventListener('submit', e => {
   const formData = new FormData(form);
   const params = new URLSearchParams(formData);
 
-  fetch("https://script.google.com/macros/s/AKfycbwc5EYvRf6uI0U6LRjbfe8-mGP7erBRU8vPvFDfyXNLZklUYSzxqiseXNfyIeHjp85jaQ/exec", { 
+  fetch("https://script.google.com/macros/s/AKfycbxBNBL0adf8CV24gixR_yLuFXYLg_hVpKFYLcvIE6r_rhjilpP2HAl_LpBo-7PAcvQRkA/exec", { 
     method: "POST", 
     body: params 
   })
