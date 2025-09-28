@@ -458,10 +458,6 @@ p {
   /* padding-bottom: 12px;   adds spacing from bottom edge */
 }
 
-.venue-info p {
-  font-size: 0.95rem;
-}
-
 /* Map Button */
 .map-link {
   font-family: 'Inria Serif', serif;
@@ -483,7 +479,7 @@ p {
 }
 
 .location-card p {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   padding: 0 12px;   /* adds left & right spacing */
   line-height: 1.6;
 }
