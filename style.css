@@ -646,7 +646,8 @@ p {
   font-family: 'Agbalumo', cursive;
   font-size: 2rem;
   color: #4e0d15;
-  margin-bottom: 30px;  /* space below heading */
+  margin-top: -6px;  /* space below heading */
+  margin-bottom: -5px;  /* space below heading */
   line-height: 1.2;
 }
 
@@ -656,6 +657,23 @@ p {
   align-items: center;
   gap: 15px;            /* space between textarea and button */
   margin-top: 15px;
+}
+
+.wishes-section {
+  width: 90%;
+  padding: 15px;
+  font-size: 1.1rem;
+  border: 2px solid #6a4e5c; /* match Name/Message border */ 
+  border-radius: 12px;         /* same as other inputs */
+  outline: none;
+  box-sizing: border-box;
+}
+
+.wish-details {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-bottom: auto; /* pushes venue-info down */
+  color: #751850;  
 }
 
 #wishInput {
@@ -672,7 +690,8 @@ p {
 #wishForm button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-  background-color: #6a4e5c;
+  background-color: #bb2e75;
+  border: 2px solid #c284b3;
 }
 
 .wish-list {
@@ -688,7 +707,7 @@ p {
 #wishForm input {
   padding: 10px;
   margin: 5px;
-  width: 45%;
+  width: 80%;
   font-size: 1rem;
   border-radius: 8px;
   border: 1px solid #ccc;
@@ -700,7 +719,7 @@ p {
   font-size: 1rem;
   border-radius: 8px;
   border: none;
-  background-color: #bb84a0; 
+  background-color: #cc6399; 
   color: white;
   cursor: pointer;
   margin-top: 5px;
@@ -752,6 +771,38 @@ p {
   display: block;
   opacity: 1;
   transform: translateY(0); /* soft slide-up */
+}
+
+#wishForm input[type="text"]{
+  padding: 15px;
+  font-size: 1rem;
+  border: 2px solid #6a4e5c; /* match Name/Message border */ 
+  border-radius: 12px;         /* same as other inputs */
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Inria Serif', serif;
+}
+
+#wishForm textarea[type="textbox"]{
+  width: 95%;
+  padding: 15px;
+  font-size: 1rem;
+  border: 2px solid #6a4e5c; /* match Name/Message border */ 
+  border-radius: 12px;         /* same as other inputs */
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Inria Serif', serif;
+}
+
+/* Focus effect */
+#wishForm input[type="text"]:focus {
+  border-color: #a83279;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#wishForm textarea[type="textbox"]:focus {
+  border-color: #a83279;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 
@@ -807,6 +858,6 @@ p {
 .super-heading {
   font-size: 4rem;   /* ~64px */
   font-weight: bold;
-  font-family: 'agbalumo', sans-serif;
+  font-family: 'Agbalumo', sans-serif;
   color: #5e3548;    
 }

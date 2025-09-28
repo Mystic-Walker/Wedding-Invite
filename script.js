@@ -249,21 +249,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 //Wish Messages
-// Auto-expand functionality
+// Auto-expand textarea
 const textarea = document.getElementById('message');
 textarea.addEventListener('input', () => {
-  textarea.style.height = 'auto';        // Reset height
-  textarea.style.height = textarea.scrollHeight + 'px'; // Adjust to content
+  textarea.style.height = 'auto';
+  textarea.style.height = textarea.scrollHeight + 'px';
 });
 
 const form = document.getElementById('wishForm');
+
 form.addEventListener('submit', e => {
   e.preventDefault();
 
   const formData = new FormData(form);
   const params = new URLSearchParams(formData);
 
-  fetch("https://script.google.com/macros/s/AKfycbxDjEUxBc__2-NMb8LtgkoxFSygC5_R8wV2CR1flsIaebKvhGA3Vm782UvzQGJXwdTlpQ/exec", { 
+  fetch("https://script.google.com/macros/s/AKfycbwc5EYvRf6uI0U6LRjbfe8-mGP7erBRU8vPvFDfyXNLZklUYSzxqiseXNfyIeHjp85jaQ/exec", { 
     method: "POST", 
     body: params 
   })
@@ -281,7 +282,6 @@ form.addEventListener('submit', e => {
 function showCustomAlert(message) {
   let alertBox = document.getElementById("custom-alert");
 
-  // create alert box if not already there
   if (!alertBox) {
     alertBox = document.createElement("div");
     alertBox.id = "custom-alert";
@@ -289,12 +289,11 @@ function showCustomAlert(message) {
   }
 
   alertBox.textContent = message;
-  alertBox.style.display = "block"; // make it visible
-  setTimeout(() => alertBox.classList.add("show"), 10); // trigger fade-in
-
-  // Auto hide after 2.5s
+  alertBox.style.display = "block";
+  setTimeout(() => alertBox.classList.add("show"), 10);
   setTimeout(() => {
     alertBox.classList.remove("show");
     setTimeout(() => (alertBox.style.display = "none"), 600);
   }, 2500);
 }
+
